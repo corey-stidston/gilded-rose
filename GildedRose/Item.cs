@@ -10,6 +10,7 @@ public class Item
     {
         var isAgedBrie = Name == "Aged Brie";
         var isBackstagePass = Name == "Backstage passes to a TAFKAL80ETC concert";
+        var isConjuredItem = Name == "Sulfuras, Hand of Ragnaros";
 
         if (isAgedBrie)
         {
@@ -28,60 +29,47 @@ public class Item
                 }
             }
         }
-        else
+        else if (isBackstagePass)
         {
-            if (isBackstagePass)
+            if (Quality < 50)
             {
-                if (Quality < 50)
+                ++Quality;
+
+                if (SellIn < 11 && Quality < 50)
                 {
                     ++Quality;
-
-                    if (SellIn < 11 && Quality < 50)
-                    {
-                        ++Quality;
-                    }
-
-                    if (SellIn < 6 && Quality < 50)
-                    {
-                        ++Quality;
-                    }
                 }
 
-                --SellIn;
-
-                if (SellIn < 0)
+                if (SellIn < 6 && Quality < 50)
                 {
-                    Quality = 0;
+                    ++Quality;
                 }
             }
-            else
+
+            --SellIn;
+
+            if (SellIn < 0)
             {
-                if (!isBackstagePass)
-                {
-                    if (Quality > 0 && Name != "Sulfuras, Hand of Ragnaros")
-                    {
-                        --Quality;
-                    }
-                }
-                else
-                {
-                    if (Quality < 50)
-                    {
-                        ++Quality;
-                    }
-                }
+                Quality = 0;
+            }
+        }
+        else
+        {
+            if (Quality > 0 && !isConjuredItem)
+            {
+                --Quality;
+            }
 
-                if (Name != "Sulfuras, Hand of Ragnaros")
-                {
-                    --SellIn;
-                }
+            if (!isConjuredItem)
+            {
+                --SellIn;
+            }
 
-                if (SellIn < 0)
+            if (SellIn < 0)
+            {
+                if (Quality > 0 && !isConjuredItem)
                 {
-                    if (!isBackstagePass && Quality > 0 && Name != "Sulfuras, Hand of Ragnaros")
-                    {
-                        --Quality;
-                    }
+                    --Quality;
                 }
             }
         }
