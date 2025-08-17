@@ -10,7 +10,7 @@ public class Item
     {
         var isAgedBrie = Name == "Aged Brie";
         var isBackstagePass = Name == "Backstage passes to a TAFKAL80ETC concert";
-        var isConjuredItem = Name == "Sulfuras, Hand of Ragnaros";
+        var isSulfuras = Name == "Sulfuras, Hand of Ragnaros";
 
         if (isAgedBrie)
         {
@@ -53,24 +53,18 @@ public class Item
                 Quality = 0;
             }
         }
-        else
+        else if (!isSulfuras)
         {
-            if (Quality > 0 && !isConjuredItem)
+            if (Quality > 0)
             {
                 --Quality;
             }
 
-            if (!isConjuredItem)
-            {
-                --SellIn;
-            }
+            --SellIn;
 
-            if (SellIn < 0)
+            if (SellIn < 0 && Quality > 0)
             {
-                if (Quality > 0 && !isConjuredItem)
-                {
-                    --Quality;
-                }
+                --Quality;
             }
         }
     }
