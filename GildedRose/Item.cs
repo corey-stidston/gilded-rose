@@ -9,6 +9,7 @@ public class Item
     public void UpdateQuality()
     {
         var isAgedBrie = Name == "Aged Brie";
+        var isBackstagePass = Name == "Backstage passes to a TAFKAL80ETC concert";
 
         if (isAgedBrie)
         {
@@ -29,89 +30,13 @@ public class Item
         }
         else
         {
-            if (Name != "Backstage passes to a TAFKAL80ETC concert")
+            if (isBackstagePass)
             {
-                if (Quality > 0)
-                {
-                    if (Name != "Sulfuras, Hand of Ragnaros")
-                    {
-                        --Quality;
-                    }
-                }
-            }
-            else
-            {
+
                 if (Quality < 50)
                 {
                     ++Quality;
 
-                    if (Name == "Backstage passes to a TAFKAL80ETC concert")
-                    {
-                        if (SellIn < 11)
-                        {
-                            if (Quality < 50)
-                            {
-                                ++Quality;
-                            }
-                        }
-
-                        if (SellIn < 6)
-                        {
-                            if (Quality < 50)
-                            {
-                                ++Quality;
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (Name != "Sulfuras, Hand of Ragnaros")
-            {
-                --SellIn;
-            }
-
-            if (SellIn < 0)
-            {
-                if (Name != "Backstage passes to a TAFKAL80ETC concert")
-                {
-                    if (Quality > 0)
-                    {
-                        if (Name != "Sulfuras, Hand of Ragnaros")
-                        {
-                            --Quality;
-                        }
-                    }
-                }
-                else
-                {
-                    Quality = 0;
-                }
-            }
-
-        }
-    }
-
-    private void NewMethod(bool isAgedBrie)
-    {
-        if (!isAgedBrie && Name != "Backstage passes to a TAFKAL80ETC concert")
-        {
-            if (Quality > 0)
-            {
-                if (Name != "Sulfuras, Hand of Ragnaros")
-                {
-                    --Quality;
-                }
-            }
-        }
-        else
-        {
-            if (Quality < 50)
-            {
-                ++Quality;
-
-                if (Name == "Backstage passes to a TAFKAL80ETC concert")
-                {
                     if (SellIn < 11)
                     {
                         if (Quality < 50)
@@ -128,19 +53,17 @@ public class Item
                         }
                     }
                 }
+
+                --SellIn;
+
+                if (SellIn < 0)
+                {
+                    Quality = 0;
+                }
             }
-        }
-
-        if (Name != "Sulfuras, Hand of Ragnaros")
-        {
-            --SellIn;
-        }
-
-        if (SellIn < 0)
-        {
-            if (!isAgedBrie)
+            else
             {
-                if (Name != "Backstage passes to a TAFKAL80ETC concert")
+                if (!isBackstagePass)
                 {
                     if (Quality > 0)
                     {
@@ -152,16 +75,33 @@ public class Item
                 }
                 else
                 {
-                    Quality = 0;
+                    if (Quality < 50)
+                    {
+                        ++Quality;
+                    }
                 }
-            }
-            else
-            {
-                if (Quality < 50)
+
+                if (Name != "Sulfuras, Hand of Ragnaros")
                 {
-                    ++Quality;
+                    --SellIn;
                 }
+
+                if (SellIn < 0)
+                {
+                    if (!isBackstagePass)
+                    {
+                        if (Quality > 0)
+                        {
+                            if (Name != "Sulfuras, Hand of Ragnaros")
+                            {
+                                --Quality;
+                            }
+                        }
+                    }
+                }
+
             }
+
         }
     }
 }
