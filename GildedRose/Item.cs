@@ -32,25 +32,18 @@ public class Item
         {
             if (isBackstagePass)
             {
-
                 if (Quality < 50)
                 {
                     ++Quality;
 
-                    if (SellIn < 11)
+                    if (SellIn < 11 && Quality < 50)
                     {
-                        if (Quality < 50)
-                        {
-                            ++Quality;
-                        }
+                        ++Quality;
                     }
 
-                    if (SellIn < 6)
+                    if (SellIn < 6 && Quality < 50)
                     {
-                        if (Quality < 50)
-                        {
-                            ++Quality;
-                        }
+                        ++Quality;
                     }
                 }
 
@@ -65,12 +58,9 @@ public class Item
             {
                 if (!isBackstagePass)
                 {
-                    if (Quality > 0)
+                    if (Quality > 0 && Name != "Sulfuras, Hand of Ragnaros")
                     {
-                        if (Name != "Sulfuras, Hand of Ragnaros")
-                        {
-                            --Quality;
-                        }
+                        --Quality;
                     }
                 }
                 else
@@ -88,20 +78,12 @@ public class Item
 
                 if (SellIn < 0)
                 {
-                    if (!isBackstagePass)
+                    if (!isBackstagePass && Quality > 0 && Name != "Sulfuras, Hand of Ragnaros")
                     {
-                        if (Quality > 0)
-                        {
-                            if (Name != "Sulfuras, Hand of Ragnaros")
-                            {
-                                --Quality;
-                            }
-                        }
+                        --Quality;
                     }
                 }
-
             }
-
         }
     }
 }
