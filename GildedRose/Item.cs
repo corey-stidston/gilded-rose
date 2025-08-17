@@ -14,7 +14,7 @@ public class Item
             {
                 if (Name != "Sulfuras, Hand of Ragnaros")
                 {
-                    Quality = Quality - 1;
+                    --Quality;
                 }
             }
         }
@@ -30,7 +30,7 @@ public class Item
                     {
                         if (Quality < 50)
                         {
-                            Quality = Quality + 1;
+                            ++Quality;
                         }
                     }
 
@@ -38,7 +38,7 @@ public class Item
                     {
                         if (Quality < 50)
                         {
-                            Quality = Quality + 1;
+                            ++Quality;
                         }
                     }
                 }
@@ -47,7 +47,7 @@ public class Item
 
         if (Name != "Sulfuras, Hand of Ragnaros")
         {
-            SellIn = SellIn - 1;
+            --SellIn;
         }
 
         if (SellIn < 0)
@@ -60,20 +60,20 @@ public class Item
                     {
                         if (Name != "Sulfuras, Hand of Ragnaros")
                         {
-                            Quality = Quality - 1;
+                            --Quality;
                         }
                     }
                 }
                 else
                 {
-                    Quality = Quality - Quality;
+                    Quality = 0;
                 }
             }
             else
             {
                 if (Quality < 50)
                 {
-                    Quality = Quality + 1;
+                    ++Quality;
                 }
             }
         }
