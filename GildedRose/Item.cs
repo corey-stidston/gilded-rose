@@ -11,6 +11,9 @@ public class Item
         var isAgedBrie = Name == "Aged Brie";
         var isBackstagePass = Name == "Backstage passes to a TAFKAL80ETC concert";
         var isSulfuras = Name == "Sulfuras, Hand of Ragnaros";
+        var isConjured = Name.StartsWith("Conjured");
+
+        if (isSulfuras) return;
 
         if (isAgedBrie)
         {
@@ -50,7 +53,21 @@ public class Item
                 Quality = 0;
             }
         }
-        else if (!isSulfuras)
+        else if (isConjured)
+        {
+            if (Quality > 0)
+            {
+                Quality -= 2;
+            }
+
+            --SellIn;
+
+            if (SellIn < 0 && Quality > 0)
+            {
+                Quality -=2;
+            }
+        }
+        else
         {
             if (Quality > 0)
             {
