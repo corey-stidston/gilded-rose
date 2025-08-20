@@ -21,12 +21,9 @@ public class Item
 
             --SellIn;
 
-            if (SellIn < 0)
+            if (SellIn < 0 && Quality < 50)
             {
-                if (Quality < 50)
-                {
-                    ++Quality;
-                }
+                ++Quality;
             }
         }
         else if (isBackstagePass)
