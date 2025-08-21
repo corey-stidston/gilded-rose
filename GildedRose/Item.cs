@@ -8,14 +8,25 @@ public class Item
 
     public void UpdateQuality()
     {
-        var isAgedBrie = Name == "Aged Brie";
-        var isBackstagePass = Name == "Backstage passes to a TAFKAL80ETC concert";
-        var isSulfuras = Name == "Sulfuras, Hand of Ragnaros";
-        var isConjured = Name.StartsWith("Conjured");
+        switch (Name)
+        {
+            case "Aged Brie":
+                UpdateAgedBrieQuality();
+                break;
+            case "Backstage passes to a TAFKAL80ETC concert":
+                UpdateBackstagePassQuality();
+                break;
+            case { } s when s.StartsWith("Conjured"):
+                UpdateConjuredItemQuality();
+                break;
+            case "Sulfuras, Hand of Ragnaros":
+                return;
+            default: UpdateNormalItemQuality();
+                break;
+        }
+        return;
 
-        if (isSulfuras) return;
-
-        if (isAgedBrie)
+        void UpdateAgedBrieQuality()
         {
             if (Quality < 50)
             {
@@ -29,7 +40,8 @@ public class Item
                 ++Quality;
             }
         }
-        else if (isBackstagePass)
+
+        void UpdateBackstagePassQuality()
         {
             if (Quality < 50)
             {
@@ -53,7 +65,8 @@ public class Item
                 Quality = 0;
             }
         }
-        else if (isConjured)
+
+        void UpdateConjuredItemQuality()
         {
             if (Quality > 0)
             {
@@ -67,7 +80,8 @@ public class Item
                 Quality -=2;
             }
         }
-        else
+
+        void UpdateNormalItemQuality()
         {
             if (Quality > 0)
             {
